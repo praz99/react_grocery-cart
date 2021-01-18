@@ -22,6 +22,8 @@ const cartReducer = (state, action) => {
     return {
       forSale: GROCERY_ITEMS,
       cart: [],
+      history: [[]],
+      historyIndex: 0,
     }
   }
   switch(action.type) {
