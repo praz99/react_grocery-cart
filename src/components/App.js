@@ -1,19 +1,17 @@
 import React from 'react';
 import History from './History';
-import GroceryItems from './GroceryItems'
+import GroceryItems from './GroceryItems';
 import GroceryCart from './GroceryCart';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <div id="app-container">
-          <h1>Grocery Cart</h1>
-          <History />
-          <div id="grocery-container">
-          <GroceryItems />
-          <GroceryCart />
-        </div>
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div id="app-container">
+    <h1>Grocery Cart</h1>
+    <History />
+    <div id="grocery-container">
+      <GroceryItems />
+      <GroceryCart />
+    </div>
+  </div>
+);
+
+export default App;
