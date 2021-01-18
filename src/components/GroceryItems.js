@@ -24,15 +24,21 @@ export default class GroceryItems extends Component {
       <div id="grocery-items">
         <table border="1">
           <thead>
-            <th></th>
-            <th>Item Price</th>
-            <th>Item Name</th>
+            <tr>
+              <th></th>
+              <th>Item Price</th>
+              <th>Item Name</th>
+            </tr>
           </thead>
           <tbody>
             {GROCERY_ITEMS.map((item, index) => {
               return(
-                <tr id={index}>
-                  <td><button>Add to Cart</button></td>
+                <tr key={index}>
+                  <td>
+                    <button onClick={() => this.props.addToCart(item)}>
+                      Add
+                    </button>
+                    </td>
                   <td>{item.price}</td>
                   <td>{item.name}</td>
                 </tr>

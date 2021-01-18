@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 
 export default class GroceryCart extends Component {
+  total() {
+    return this.props.items.reduce((total, item) => {
+      return total + item.price;
+    }, 0)
+  }
   render () {
-    if (this.props.items) {
+    if (this.props.items.length === 0) {
       return <div id="grocery-cart">
         <p>Cart is empty.</p>
       </div>
@@ -11,15 +16,17 @@ export default class GroceryCart extends Component {
       <div id="grocery-cart">
         <table border="1">
           <thead>
-            <th></th>
-            <th>Item Price</th>
-            <th>Item Name</th>
+            <tr>
+              <th></th>
+              <th>Item Price</th>
+              <th>Item Name</th>
+            </tr>
           </thead>
           <tbody>
             {this.props.items.map((item, index) => {
               return(
-                <tr id={index}>
-                  <td><button>Add to Cart</button></td>
+                <tr key={index}>
+                  <td><button>Remove</button></td>
                   <td>{item.price}</td>
                   <td>{item.name}</td>
                 </tr>
@@ -27,6 +34,10 @@ export default class GroceryCart extends Component {
             })}
           </tbody>
         </table>
+
+        <p>
+          Total: ${this.total()}
+        </p>
       </div>
     )
   }

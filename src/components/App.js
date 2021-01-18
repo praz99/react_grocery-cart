@@ -13,8 +13,9 @@ export default class App extends React.Component {
   }
 
   addToCart(item) {
+    console.log('item:', item)
     const cart = [...this.state.cart, item]
-    this.setState(cart);
+    this.setState({cart});
   }
 
   render() {
