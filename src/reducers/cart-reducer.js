@@ -27,19 +27,45 @@ const cartReducer = (state, action) => {
     }
   }
   switch(action.type) {
-    case 'ADD_TO_CART': {
-      const cart = [...state.cart, action.item]
+    case 'UNDO': {
+      let historyIndex = state.historyIndex - 1;
+      historyIndex = Math.max(historyIndex, 0)
       return {
-        ...state, cart
+        ...state,
+        cart: state.history[historyIndex],
+        historyIndex
+      }
+    }
+
+    case 'REDO': {
+      let historyIndex = state.historyIndex + 1;
+      historyIndex = Math.min(historyIndex, state.history.length - 1)
+      return {
+        ...state,
+        cart: state.history[historyIndex],
+        historyIndex
+      }
+    }
+
+    case 'ADD_TO_CART': {
+      const cart = [...state.cart, action.item];
+
+      const history = [...state.history, cart]
+      const historyIndex = state.historyIndex + 1
+
+      return {
+        ...state, cart, history, historyIndex,
       }
     }
 
     case 'REMOVE_FROM_CART': {
       const cart = [...state.cart];
       cart.splice(action.index, 1)
+      const history = [...state.history, cart]
+      const historyIndex = state.historyIndex + 1
+
       return {
-        ...state, cart
-      }
+        ...state, cart, history, historyIndex,
     }
 
     default:
