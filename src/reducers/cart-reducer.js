@@ -26,6 +26,7 @@ const cartReducer = (state, action) => {
       historyIndex: 0,
     }
   }
+
   switch(action.type) {
     case 'UNDO': {
       let historyIndex = state.historyIndex - 1;
@@ -66,6 +67,7 @@ const cartReducer = (state, action) => {
 
       return {
         ...state, cart, history, historyIndex,
+      }
     }
 
     default:
