@@ -1,67 +1,66 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+/* eslint-disable react/no-array-index-key */
 
-class GroceryCart extends Component {
-  total() {
-    return this.props.items.reduce((total, item) => {
-      return total + item.price;
-    }, 0)
-  }
-  render () {
-    if (this.props.items.length === 0) {
-      return <div id="grocery-cart">
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { removeFromCart } from '../reducers/actions';
+
+const GroceryCart = ({ items, removeFromCart }) => {
+  const total = () => items.reduce((total, item) => total + item.price, 0);
+
+  if (items.length === 0) {
+    return (
+      <div id="grocery-cart">
         <p>Cart is empty.</p>
       </div>
-    }
-    return(
-      <div id="grocery-cart">
-        <table border="1">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Item Price</th>
-              <th>Item Name</th>
+    );
+  }
+  return (
+    <div id="grocery-cart">
+      <table border="1">
+        <thead>
+          <tr>
+            <th aria-label="blank" />
+            <th>Item Price</th>
+            <th>Item Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, index) => (
+            <tr key={index}>
+              <td>
+                <button type="button" onClick={() => removeFromCart(index)}>
+                  Remove
+                </button>
+              </td>
+              <td>{item.price}</td>
+              <td>{item.name}</td>
             </tr>
-          </thead>
-          <tbody>
-            {this.props.items.map((item, index) => {
-              return(
-                <tr key={index}>
-                  <td>
-                    <button onClick={() => this.props.removeFromCart(index)}>
-                      Remove
-                    </button>
-                  </td>
-                  <td>{item.price}</td>
-                  <td>{item.name}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
 
-        <p>
-          Total: ${this.total()}
-        </p>
-      </div>
-    )
-  }
-}
+      <p>
+        Total: $
+        {total()}
+      </p>
+    </div>
+  );
+};
 
-function mapStateToProps(state) {
-  return {
-    items: state.cart,
-  }
-}
+GroceryCart.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeFromCart: PropTypes.func.isRequired,
+};
 
-function mapDispatchToProps(dispatch) {
-  return {
-    removeFromCart: (index) => {
-      dispatch({
-        type: 'REMOVE_FROM_CART',
-        index
-      })
-    }
-  }
-}
+const mapStateToProps = state => ({
+  items: state.cart,
+});
+
+const mapDispatchToProps = dispatch => ({
+  removeFromCart: index => {
+    dispatch(removeFromCart(index));
+  },
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryCart);
