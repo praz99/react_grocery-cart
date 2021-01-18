@@ -8,14 +8,21 @@ export default class App extends React.Component {
     this.state = {
       cart: []
     }
+
+    this.addToCart = this.addToCart.bind(this);
+  }
+
+  addToCart(item) {
+    const cart = [...this.state.cart, item]
+    this.setState(cart);
   }
 
   render() {
     return (
       <div id="app-container">
-        <p>Welcome to my App</p>
-        <div id="grocery-container">
-          <GroceryItems />
+          <h1>Grocery Cart</h1>
+          <div id="grocery-container">
+          <GroceryItems addToCart={this.addToCart}/>
           <GroceryCart items={this.state.cart} />
         </div>
       </div>
