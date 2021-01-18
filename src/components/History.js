@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { undo, redo } from '../reducers/actions';
 
-class History extends Component {
-  render() {
-    return (
-      <div id="history-controls">
-        <button onClick={this.props.undo}>undo</button>
-        <button onClick={this.props.redo}>redo</button>
-      </div>
-    );
-  }
-}
+const History = ({ undo, redo }) => (
+  <div id="history-controls">
+    <button type="button" onClick={undo}>undo</button>
+    <button type="button" onClick={redo}>redo</button>
+  </div>
+);
+
+History.propTypes = {
+  undo: PropTypes.func.isRequired,
+  redo: PropTypes.func.isRequired,
+};
 
 function mapDispatchToProps(dispatch) {
   return {
