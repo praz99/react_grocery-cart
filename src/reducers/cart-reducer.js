@@ -17,6 +17,7 @@ const GROCERY_ITEMS = [
 ]
 
 const cartReducer = (state, action) => {
+  console.log(action);
   if (state === undefined) {
     return {
       forSale: GROCERY_ITEMS,
@@ -25,7 +26,10 @@ const cartReducer = (state, action) => {
   }
   switch(action.type) {
     case 'ADD_TO_CART': {
-
+      const cart = [...state.cart, action.item]
+      return {
+        ...state, cart
+      }
     }
 
     case 'REMOVE_FROM_CART': {
