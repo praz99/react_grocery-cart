@@ -22,7 +22,7 @@ class GroceryItems extends Component {
                     <button onClick={() => this.props.addToCart(item)}>
                       Add
                     </button>
-                    </td>
+                  </td>
                   <td>{item.price}</td>
                   <td>{item.name}</td>
                 </tr>
