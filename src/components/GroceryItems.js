@@ -24,6 +24,7 @@ export default class GroceryItems extends Component {
       <div>
         <table border="1">
           <thead>
+            <th></th>
             <th>Item Price</th>
             <th>Item Name</th>
           </thead>
@@ -31,6 +32,7 @@ export default class GroceryItems extends Component {
             {GROCERY_ITEMS.map((item, index) => {
               return(
                 <tr id={index}>
+                  <td><button>Add to Cart</button></td>
                   <td>{item.price}</td>
                   <td>{item.name}</td>
                 </tr>
