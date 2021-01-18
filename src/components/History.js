@@ -15,10 +15,9 @@ History.propTypes = {
   redo: PropTypes.func.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    undo: () => dispatch(undo()),
-    redo: () => dispatch(redo()),
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  undo: () => dispatch(undo()),
+  redo: () => dispatch(redo()),
+});
+
 export default connect(null, mapDispatchToProps)(History);
