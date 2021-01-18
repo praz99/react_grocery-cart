@@ -51,8 +51,19 @@ const cartReducer = (state, action) => {
     case 'ADD_TO_CART': {
       const cart = [...state.cart, action.item];
 
-      const history = [...state.history, cart]
-      const historyIndex = state.historyIndex + 1
+      // copy all of the history
+      const history = [...state.history]
+      // chop off all the recorder future history that happened after this
+      // point in time. Performing actions in the past destroys all of
+      // the previous future. You can't go back to the future.
+
+      history.splice(state.historyIndex + 1, state.history.length);
+
+      // add the current cart state to the end of the history array
+      history.push(cart);
+
+      // mark our historyIndex as being the last thing in the array
+      const historyIndex = history.length - 1
 
       return {
         ...state, cart, history, historyIndex,
@@ -62,8 +73,20 @@ const cartReducer = (state, action) => {
     case 'REMOVE_FROM_CART': {
       const cart = [...state.cart];
       cart.splice(action.index, 1)
-      const history = [...state.history, cart]
-      const historyIndex = state.historyIndex + 1
+
+      // copy all of the history
+      const history = [...state.history]
+      // chop off all the recorder future history that happened after this
+      // point in time. Performing actions in the past destroys all of
+      // the previous future. You can't go back to the future.
+
+      history.splice(state.historyIndex + 1, state.history.length);
+
+      // add the current cart state to the end of the history array
+      history.push(cart);
+
+      // mark our historyIndex as being the last thing in the array
+      const historyIndex = history.length - 1
 
       return {
         ...state, cart, history, historyIndex,
