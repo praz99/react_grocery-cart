@@ -21,7 +21,7 @@ const GROCERY_ITEMS = [
 export default class GroceryItems extends Component {
   render () {
     return(
-      <div>
+      <div id="grocery-items">
         <table border="1">
           <thead>
             <th></th>

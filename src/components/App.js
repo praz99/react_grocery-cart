@@ -1,13 +1,23 @@
 import React from 'react';
 import GroceryItems from './GroceryItems'
+import GroceryCart from './GroceryCart';
 
-function App() {
-  return (
-    <div className="App">
-      <p>Welcome to my React App</p>
-      <GroceryItems />
-    </div>
-  );
+export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      cart: []
+    }
+  }
+
+  render() {
+    return (
+      <div id="app-container">
+        <p>Welcome to my App</p>
+        <GroceryItems />
+        <GroceryCart items={this.state.cart} />
+      </div>
+    )
+  }
 }
 
-export default App;
