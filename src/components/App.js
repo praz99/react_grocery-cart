@@ -14,8 +14,10 @@ export default class App extends React.Component {
     return (
       <div id="app-container">
         <p>Welcome to my App</p>
-        <GroceryItems />
-        <GroceryCart items={this.state.cart} />
+        <div id="grocery-container">
+          <GroceryItems />
+          <GroceryCart items={this.state.cart} />
+        </div>
       </div>
     )
   }

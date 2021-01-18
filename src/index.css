@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#app-container {
+  width: 600px;
+  background-color: white;
+  border: solid black 1px;
+  margin: auto;
+  padding: 5px;
+}
+
+#grocery-container {
+  display: flex;
+  justify-content: center;
+}
+
+#grocery-items,
+#grocery-cart {
+  width: 48%;
+  margin: 1%;
+}
